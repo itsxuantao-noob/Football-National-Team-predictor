@@ -77,3 +77,6 @@ Open `explore.ipynb` in Jupyter or VS Code and run all cells.
 A personal project focused on building a complete ML pipeline end to end — from
 raw data through feature engineering, model selection, and (eventually)
 deployment.
+
+
+Have Fun:)
