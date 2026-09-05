@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>National Team Predictor</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>&#9917;</text></svg>" />
+</head>
+<body>
+  <main>
+    <header>
+      <h1>National Team Predictor</h1>
+      <p class="subtitle">
+        Win / draw / loss probabilities for men's international fixtures, from ELO and form.
+      </p>
+      <p class="model-status" id="model-status">Loading model&hellip;</p>
+    </header>
+
+    <section class="card">
+      <form id="predict-form">
+        <div class="teams">
+          <label class="team-field">
+            <span>Home team</span>
+            <input id="home-team" list="team-list" autocomplete="off" placeholder="Brazil" required />
+            <small class="elo" id="home-elo"></small>
+          </label>
+
+          <button type="button" id="swap" class="swap" title="Swap teams" aria-label="Swap teams">&#8646;</button>
+
+          <label class="team-field">
+            <span>Away team</span>
+            <input id="away-team" list="team-list" autocomplete="off" placeholder="France" required />
+            <small class="elo" id="away-elo"></small>
+          </label>
+        </div>
+
+        <datalist id="team-list"></datalist>
+
+        <div class="options">
+          <label>
+            <span>Competition</span>
+            <select id="competition">
+              <option value="major">Major tournament</option>
+              <option value="qualification">Qualifier</option>
+              <option value="friendly">Friendly</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+
+          <label class="checkbox">
+            <input type="checkbox" id="neutral" checked />
+            <span>Neutral venue</span>
+          </label>
+
+          <label class="checkbox">
+            <input type="checkbox" id="knockout" checked />
+            <span>Knockout tie</span>
+          </label>
+        </div>
+
+        <button type="submit" id="submit">Predict</button>
+      </form>
+
+      <p class="error" id="error" hidden></p>
+    </section>
+
+    <section class="card result" id="result" hidden>
+      <h2 id="result-title"></h2>
+      <p class="result-context" id="result-context"></p>
+
+      <div class="bar" id="bar">
+        <div class="segment home" id="seg-home"></div>
+        <div class="segment draw" id="seg-draw"></div>
+        <div class="segment away" id="seg-away"></div>
+      </div>
+
+      <ul class="legend">
+        <li><span class="swatch home"></span><span id="label-home"></span></li>
+        <li><span class="swatch draw"></span><span id="label-draw"></span></li>
+        <li><span class="swatch away"></span><span id="label-away"></span></li>
+      </ul>
+
+      <div class="advance" id="advance" hidden>
+        <h3>Who advances</h3>
+        <p class="hint">Draws are resolved by extra time and penalties, with a small edge to the stronger side.</p>
+        <div class="advance-rows" id="advance-rows"></div>
+      </div>
+    </section>
+
+    <footer>
+      <p id="footer-metrics"></p>
+      <p><a href="/docs">API documentation</a></p>
+    </footer>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
